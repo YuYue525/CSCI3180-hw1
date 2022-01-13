@@ -15,7 +15,7 @@
 * Student ID : 1155124490
 * Email Addr : 1155124490@link.cuhk.edu.hk
 */
-#include "sort.h"
+//#include "sort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,8 +46,37 @@ void checkFile(void)
     }
 }
 
+void merge(void)
+{
+    FILE * trans711 = fopen("trans711.txt", "r");
+    FILE * trans713 = fopen("trans713.txt", "r");
+    FILE * transSorted = fopen("transSorted.txt", "w");
+    
+    char line[100];
+    
+    while(fgets(line, 100, trans711)!=NULL)
+    {
+        for(int i = 0; i < 29; i++)
+            fprintf(transSorted, "%c", line[i]);
+        fprintf(transSorted, "\n");
+    }
+
+    while(fgets(line, 100, trans713)!=NULL)
+    {
+        for(int i = 0; i < 29; i++)
+            fprintf(transSorted, "%c", line[i]);
+        fprintf(transSorted, "\n");
+    }
+    
+}
 
 int main(void) {
-    sort_transaction("trans711.txt", "trans711_new.txt");
+    checkFile();
+    sort_transaction("trans711.txt", "transSorted711.txt");
+    sort_transaction("trans713.txt", "transSorted713.txt");
+    sort_transaction("transSorted.txt", "transSorted.txt");
+    merge();
+    
+    
     return 0;
 }

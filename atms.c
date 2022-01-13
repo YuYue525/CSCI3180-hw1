@@ -105,9 +105,8 @@ int checkAccount(void) // return input account
 
         int findOrNot = 0;
         
-        while(!feof(master))
+        while(fgets(line, 100, master)!=NULL)
         {
-            fgets(line, 100, master);
             int correct = 1;
             for(int i=20; i<36; i++)
             {
@@ -232,9 +231,9 @@ void chooseService(FILE * trans)
                 
                 int findOrNot = 0;
                 char target_line[100];
-                while(!feof(master))
+                while(fgets(target_line, 100, master)!=NULL)
                 {
-                    fgets(target_line, 100, master);
+                    
                     int correct = 1;
                     for(int i=20; i<36; i++)
                     {
