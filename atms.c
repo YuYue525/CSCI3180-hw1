@@ -32,21 +32,12 @@ void checkFile(void)
         printf("non-existing file!\n");
         exit(0);
     }
-    /*
-    FILE * trans711;
-    if((trans711 = fopen("trans711.txt", "r")) == NULL)
-    {
-        printf("non-existing file!\n");
-        exit(0);
-    }
     
-    FILE * trans713;
-    if((trans713 = fopen("trans713.txt", "r")) == NULL)
-    {
-        printf("non-existing file!\n");
-        exit(0);
-    }
-    */
+    FILE * trans;
+    trans = fopen("trans711.txt", "w");
+    fclose(trans);
+    trans = fopen("trans713.txt", "w");
+    fclose(trans);
 }
 
 FILE * chooseATM(void)
@@ -187,7 +178,7 @@ void chooseService(FILE * trans)
                 printf("=> INVALID INPUT\n");
             }
         }
-        if(input_service[0]=='W' && input_service[1]=='\0')
+        else if(input_service[0]=='W' && input_service[1]=='\0')
         {
             while(1)
             {
@@ -197,7 +188,7 @@ void chooseService(FILE * trans)
                 getchar();
                 if(input_amount >= 0)
                 {
-                    int balance = 0;
+                    long long balance = 0;
                     for(int i = 43; i<58; i++)
                         balance = balance * 10 + (line[i]-'0');
                     if(balance < (int)(input_amount * 100))
@@ -219,7 +210,7 @@ void chooseService(FILE * trans)
                     printf("=> INVALID INPUT\n");
             }
         }
-        if(input_service[0]=='T' && input_service[1]=='\0')
+        else if(input_service[0]=='T' && input_service[1]=='\0')
         {
             int transOrNot = 0;
             while(transOrNot == 0)
@@ -267,7 +258,7 @@ void chooseService(FILE * trans)
                             getchar();
                             if(input_amount >= 0)
                             {
-                                int balance = 0;
+                                long long balance = 0;
                                 for(int i = 43; i<58; i++)
                                     balance = balance * 10 + (line[i]-'0');
                                 if(balance < (int)(input_amount * 100))
@@ -322,15 +313,16 @@ int main(void) {
     FILE *trans = NULL;
 
     checkFile();
+
     while(1)
     {
         int exit = 0;
         
         trans = chooseATM();
         if(checkAccount()!=0)
-        {
             chooseService(trans);
-        }
+        else
+            continue;
         char input_continue[100];
         while(1)
         {
