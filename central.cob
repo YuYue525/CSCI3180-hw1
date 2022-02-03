@@ -217,7 +217,7 @@
            NOT AT END
                IF UPDATEDBALANCE-SIGN = '-' AND UPDATEDBALANCE >0 THEN
                    MOVE "Name: " TO NEG-NAME-TITLE
-                   MOVE "Account Number: " TO NEG-ACCOUNT-TITLE
+                   MOVE " Account Number: " TO NEG-ACCOUNT-TITLE
                    MOVE " Balance: " TO NEG-BALANCE-TITLE
                    MOVE UPDATEDNAME TO NEG-NAME
                    MOVE UPDATEDACCOUNT-NUM TO NEG-ACCOUNT-NUM
