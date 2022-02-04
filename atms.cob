@@ -49,7 +49,7 @@
 
        FD MASTER.
        01 MASTER-RECORD.
-           02 NAME PIC A(20).
+           02 NAME PIC X(20).
            02 ACCOUNT-NUM PIC 9(16).
            02 PWD PIC 9(6).
            02 BALANCE-SIGN PIC X.
@@ -64,7 +64,7 @@
        01 RECORD-NUM PIC 9(5) VALUE ZERO.
        01 INPUT-TARGET-ACCOUNT PIC X(16).
        01 CURRENT-RECORD.
-           02 CURRENT-NAME PIC A(20).
+           02 CURRENT-NAME PIC X(20).
            02 CURRENT-ACCOUNT-NUM PIC 9(16).
            02 CURRENT-PWD PIC 9(6).
            02 CURRENT-BALANCE-SIGN PIC X.
@@ -72,6 +72,10 @@
 
        PROCEDURE DIVISION.
        MAIN-PARAGRAPH.
+           OPEN OUTPUT TRANS711.
+           CLOSE TRANS711.
+           OPEN OUTPUT TRANS713.
+           CLOSE TRANS713.
            DISPLAY "##############################################".
            DISPLAY "##         Gringotts Wizarding Bank         ##".
            DISPLAY "##                 Welcome                  ##".
@@ -101,6 +105,12 @@
                IF NOT ACCOUNT-NUM = INPUT-ACCOUNT OR
                    NOT PWD = INPUT-PWD THEN
                    GO TO READ-MASTER
+               END-IF
+               IF ACCOUNT-NUM = INPUT-ACCOUNT AND PWD = INPUT-PWD
+                   AND BALANCE-SIGN = "-" AND BALANCE > 0 THEN
+                   DISPLAY "=> NEGATIVE REMAINS TRANSACTION ABORT"
+                   CLOSE MASTER
+                   GO TO CHOOSE-ATM-PARAGRAPH
                END-IF
                IF ACCOUNT-NUM = INPUT-ACCOUNT AND PWD = INPUT-PWD THEN
                    MOVE MASTER-RECORD TO CURRENT-RECORD
@@ -267,6 +277,8 @@
 
        CONTINUE-PARAGRAPH.
            DISPLAY "=> CONTINUE?"
+           DISPLAY "=> N FOR NO"
+           DISPLAY "=> Y FOR YES"
            ACCEPT USER-INPUT.
            IF USER-INPUT = 'Y' THEN
                GO TO CHOOSE-ATM-PARAGRAPH
