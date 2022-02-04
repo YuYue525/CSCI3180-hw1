@@ -127,19 +127,18 @@
            ON ASCENDING KEY WORK-TS
            USING TRANS713 GIVING TRANSSORTED713.
 
-           OPEN OUTPUT TRANSSORTED.
-           CLOSE TRANSSORTED.
+           
 
            OPEN INPUT TRANS711.
+           OPEN OUTPUT TRANSSORTED.
        COPY-711.
            READ TRANS711 INTO 711-RECORD
            NOT AT END
-               OPEN EXTEND TRANSSORTED
                MOVE 711-RECORD TO SORTED-RECORD
                WRITE SORTED-RECORD
-               CLOSE TRANSSORTED
                GO TO COPY-711
            AT END
+               CLOSE TRANSSORTED
                CLOSE TRANS711.
 
            OPEN INPUT TRANS713.
