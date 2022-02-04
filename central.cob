@@ -127,8 +127,6 @@
            ON ASCENDING KEY WORK-TS
            USING TRANS713 GIVING TRANSSORTED713.
 
-           
-
            OPEN INPUT TRANS711.
            OPEN OUTPUT TRANSSORTED.
        COPY-711.
