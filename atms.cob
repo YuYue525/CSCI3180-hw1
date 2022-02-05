@@ -56,8 +56,8 @@
            02 BALANCE PIC 9(15).
 
        WORKING-STORAGE SECTION.
-       01 711_START PIC 9(1) VALUE 1.
-       01 713_START PIC 9(1) VALUE 1.
+       01 711-START PIC 9(1) VALUE 1.
+       01 713-START PIC 9(1) VALUE 1.
        01 INPUT-ATM PIC X(20).
        01 USER-INPUT PIC X(20).
        01 INPUT-ACCOUNT PIC X(16).
@@ -152,7 +152,7 @@
            END-IF.
            IF INPUT-AMOUNT >= 0 THEN
                MULTIPLY 100 BY INPUT-AMOUNT GIVING INPUT-AMOUNT
-               IF INPUT-ATM = 1 AND 711_START = 0 THEN
+               IF INPUT-ATM = 1 AND 711-START = 0 THEN
                    OPEN EXTEND TRANS711
                    MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                    MOVE "D" TO 711-OP
@@ -162,7 +162,7 @@
                    WRITE 711-RECORD
                    CLOSE TRANS711
                END-IF
-               IF INPUT-ATM = 2 AND 713_START = 0 THEN
+               IF INPUT-ATM = 2 AND 713-START = 0 THEN
                    OPEN EXTEND TRANS713
                    MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                    MOVE "D" TO 713-OP
@@ -172,7 +172,7 @@
                    WRITE 713-RECORD
                    CLOSE TRANS713
                END-IF
-               IF INPUT-ATM = 1 AND 711_START = 1 THEN
+               IF INPUT-ATM = 1 AND 711-START = 1 THEN
                    OPEN OUTPUT TRANS711
                    MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                    MOVE "D" TO 711-OP
@@ -181,9 +181,9 @@
                    ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                    WRITE 711-RECORD
                    CLOSE TRANS711
-                   MOVE 0 TO 711_START
+                   MOVE 0 TO 711-START
                END-IF
-               IF INPUT-ATM = 2 AND 713_START = 1 THEN
+               IF INPUT-ATM = 2 AND 713-START = 1 THEN
                    OPEN OUTPUT TRANS713
                    MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                    MOVE "D" TO 713-OP
@@ -192,7 +192,7 @@
                    ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                    WRITE 713-RECORD
                    CLOSE TRANS713
-                   MOVE 0 TO 713_START
+                   MOVE 0 TO 713-START
                END-IF
            END-IF.
            GO TO CONTINUE-PARAGRAPH.
@@ -209,7 +209,7 @@
                DISPLAY "=> INSUFFICIENT BALANCE"
                GO TO WITHDRAWAL-PARAGRAPH
            END-IF.
-           IF INPUT-ATM = 1 AND 711_START = 0 THEN
+           IF INPUT-ATM = 1 AND 711-START = 0 THEN
                OPEN EXTEND TRANS711
                MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                MOVE "W" TO 711-OP
@@ -219,7 +219,7 @@
                WRITE 711-RECORD
                CLOSE TRANS711
            END-IF
-           IF INPUT-ATM = 2 AND 713_START = 0 THEN
+           IF INPUT-ATM = 2 AND 713-START = 0 THEN
                OPEN EXTEND TRANS713
                MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                MOVE "W" TO 713-OP
@@ -229,7 +229,7 @@
                WRITE 713-RECORD
                CLOSE TRANS713
            END-IF
-           IF INPUT-ATM = 1 AND 711_START = 1 THEN
+           IF INPUT-ATM = 1 AND 711-START = 1 THEN
                OPEN OUTPUT TRANS711
                MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                MOVE "W" TO 711-OP
@@ -238,9 +238,9 @@
                ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                WRITE 711-RECORD
                CLOSE TRANS711
-               MOVE 0 TO 711_START
+               MOVE 0 TO 711-START
            END-IF
-           IF INPUT-ATM = 2 AND 713_START = 1 THEN
+           IF INPUT-ATM = 2 AND 713-START = 1 THEN
                OPEN OUTPUT TRANS713
                MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                MOVE "W" TO 713-OP
@@ -249,7 +249,7 @@
                ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                WRITE 713-RECORD
                CLOSE TRANS713
-               MOVE 0 TO 713_START
+               MOVE 0 TO 713-START
            END-IF
            GO TO CONTINUE-PARAGRAPH.
 
@@ -287,7 +287,7 @@
                DISPLAY "=> INSUFFICIENT BALANCE"
                GO TO CHECK-BALANCE
            END-IF.
-           IF INPUT-ATM = 1 AND 711_START = 0 THEN
+           IF INPUT-ATM = 1 AND 711-START = 0 THEN
                OPEN EXTEND TRANS711
                MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                MOVE "W" TO 711-OP
@@ -303,7 +303,7 @@
                WRITE 711-RECORD
                CLOSE TRANS711
            END-IF
-           IF INPUT-ATM = 2 AND 713_START = 0 THEN
+           IF INPUT-ATM = 2 AND 713-START = 0 THEN
                OPEN EXTEND TRANS713
                MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                MOVE "W" TO 713-OP
@@ -319,7 +319,7 @@
                WRITE 713-RECORD
                CLOSE TRANS713
            END-IF
-           IF INPUT-ATM = 1 AND 711_START = 1 THEN
+           IF INPUT-ATM = 1 AND 711-START = 1 THEN
                OPEN OUTPUT TRANS711
                MOVE CURRENT-ACCOUNT-NUM TO 711-ID
                MOVE "W" TO 711-OP
@@ -334,9 +334,9 @@
                ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                WRITE 711-RECORD
                CLOSE TRANS711
-               MOVE 0 TO 711_START
+               MOVE 0 TO 711-START
            END-IF
-           IF INPUT-ATM = 2 AND 713_START = 1 THEN
+           IF INPUT-ATM = 2 AND 713-START = 1 THEN
                OPEN OUTPUT TRANS713
                MOVE CURRENT-ACCOUNT-NUM TO 713-ID
                MOVE "W" TO 713-OP
@@ -351,7 +351,7 @@
                ADD 1 TO RECORD-NUM GIVING RECORD-NUM
                WRITE 713-RECORD
                CLOSE TRANS713
-               MOVE 0 TO 713_START
+               MOVE 0 TO 713-START
            END-IF
            GO TO CONTINUE-PARAGRAPH.
 
